@@ -1,0 +1,83 @@
+package gyber.org.mainCore.data;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+
+@Entity
+@Table(name = "users")
+public class User {
+
+    @Id
+    private Long id;
+    private String firstName;
+    private String lastName;
+
+    private String nickName;
+
+    private String email;
+    private String passwd;
+
+    private UserAllData userAllData;
+
+
+
+    public User(String firstName, String lastName, String nickName, String email, String passwd, UserAllData userAllData) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.nickName = nickName;
+        this.email = email;
+        this.passwd = passwd;
+        this.userAllData = userAllData;
+    }
+
+
+    public User(String email , String firstName , String lastName , String passwd){
+        this.email = email;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.passwd = passwd;
+
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public String getNickName() {
+        return nickName;
+    }
+
+    public void setNickName(String nickName) {
+        this.nickName = nickName;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public UserAllData getUserAllData() {
+        return userAllData;
+    }
+
+    public void setUserAllData(UserAllData userAllData) {
+        this.userAllData = userAllData;
+    }
+}
