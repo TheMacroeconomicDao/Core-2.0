@@ -1,5 +1,6 @@
 package gyber.org.mainCore.data;
 
+import gyber.org.mainCore.data.notifications.Notification;
 import jakarta.persistence.*;
 
 import java.util.Date;

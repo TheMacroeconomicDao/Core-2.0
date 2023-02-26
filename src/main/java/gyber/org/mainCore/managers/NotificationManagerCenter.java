@@ -1,6 +1,6 @@
 package gyber.org.mainCore.managers;
 
-import gyber.org.mainCore.data.Notification;
+import gyber.org.mainCore.data.notifications.Notification;
 import jakarta.annotation.PostConstruct;
 import org.springframework.stereotype.Component;
 
