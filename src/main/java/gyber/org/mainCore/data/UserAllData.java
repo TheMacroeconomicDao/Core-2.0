@@ -13,6 +13,7 @@ public class UserAllData {
 
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long userID;
     private String userAvatarPath;
     private Date logInUserDate;
