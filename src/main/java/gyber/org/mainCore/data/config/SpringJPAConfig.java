@@ -4,8 +4,6 @@ import org.springframework.boot.autoconfigure.jdbc.DataSourceProperties;
 import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.PropertySource;
-import org.springframework.context.annotation.PropertySources;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
@@ -21,30 +19,23 @@ public class SpringJPAConfig {
 
 
 
-//    @Bean
-//    public PersistenceDataSourceProperties persistenceDataSourceProperties(){
-////        return new PersistenceDataSourceProperties()
-////                .initializeDataSourceBuilder()
-////                .
-//    }
-
-
     @Bean
-    public DataSource dataSource() {
+    public DataSourceProperties persistenceDataSourceProperties(){
+        return new PersistenceDataSourcePropertiesBuilder();
+    }
+
+
+
+    // Не работает
+//    @Bean
+//    public DataSource dataSource() {
 //        return DataSourceBuilder.create()
 //                .url("jdbc:mysql://localhost:3306/userdaotest")
 //                .driverClassName("com.mysql.cj.jdbc.Driver")
 //                .username("root")
 //                .password("abcdef")
 //                .build();
-        return new DataSourceProperties()
-                        .initializeDataSourceBuilder()
-                        .url("jdbc:mysql://localhost:3306/userdaotest")
-                        .driverClassName("com.mysql.cj.jdbc.Driver")
-                        .username("root")
-                        .password("abcdef")
-                        .build();
-    }
+//    }
 
 
     @Bean
@@ -66,7 +57,8 @@ public class SpringJPAConfig {
     @Bean
     public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
         LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
-        em.setDataSource(dataSource());
+        //  em.setDataSource(dataSourceProperties().initializeDataSourceBuilder().build());
+        em.setDataSource(persistenceDataSourceProperties().initializeDataSourceBuilder().build());
         em.setJpaVendorAdapter(new HibernateJpaVendorAdapter());
         em.setPackagesToScan("gyber.org.mainCore.data");
 
@@ -86,6 +78,17 @@ public class SpringJPAConfig {
         JpaTransactionManager transactionManager = new JpaTransactionManager();
         transactionManager.setEntityManagerFactory(entityManagerFactory().getObject());
         return transactionManager;
+    }
+
+
+    @Bean
+    public Properties properties(){
+        Properties jpaProperties = new Properties();
+        jpaProperties.put("hibernate.dialect", "org.hibernate.dialect.MySQL5Dialect");
+        jpaProperties.put("hibernate.show_sql", true);
+
+        return jpaProperties;
+
     }
 
 
