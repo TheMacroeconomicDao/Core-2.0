@@ -20,15 +20,30 @@ import java.util.Properties;
 public class SpringJPAConfig {
 
 
+
+//    @Bean
+//    public PersistenceDataSourceProperties persistenceDataSourceProperties(){
+////        return new PersistenceDataSourceProperties()
+////                .initializeDataSourceBuilder()
+////                .
+//    }
+
+
     @Bean
     public DataSource dataSource() {
-        return DataSourceBuilder.create()
-                .url("jdbc:mysql://localhost:3306/userdaotest")
-                .driverClassName("com.mysql.cj.jdbc.Driver")
-                .username("root")
-                .password("abcdef")
-                .build();
-     //   return persistenceDataSourceProperties().initializeDataSourceBuilder().build();
+//        return DataSourceBuilder.create()
+//                .url("jdbc:mysql://localhost:3306/userdaotest")
+//                .driverClassName("com.mysql.cj.jdbc.Driver")
+//                .username("root")
+//                .password("abcdef")
+//                .build();
+        return new DataSourceProperties()
+                        .initializeDataSourceBuilder()
+                        .url("jdbc:mysql://localhost:3306/userdaotest")
+                        .driverClassName("com.mysql.cj.jdbc.Driver")
+                        .username("root")
+                        .password("abcdef")
+                        .build();
     }
 
 
@@ -51,7 +66,7 @@ public class SpringJPAConfig {
     @Bean
     public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
         LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
-        em.setDataSource(dataSourceProperties().initializeDataSourceBuilder().build());
+        em.setDataSource(dataSource());
         em.setJpaVendorAdapter(new HibernateJpaVendorAdapter());
         em.setPackagesToScan("gyber.org.mainCore.data");
 

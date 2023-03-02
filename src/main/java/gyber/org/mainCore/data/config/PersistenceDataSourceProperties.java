@@ -7,34 +7,34 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 
 //@Configuration
-//@ConfigurationProperties(prefix = "spring.datasource")
+@ConfigurationProperties(prefix = "spring.datasource")
 //@PropertySource("application.properties")
 public class PersistenceDataSourceProperties extends DataSourceProperties{
 
-    public PersistenceDataSourceProperties set$Name(@Value("${}") String dataBaseName) {
-        super.setName(dataBaseName);
-        return this;
+//    public PersistenceDataSourceProperties set$Name(@Value("${url}") String dataBaseName) {
+//        super.setName(dataBaseName);
+//        return this;
+//
+//    }
 
-    }
-
-    public PersistenceDataSourceProperties set$Username(String username) {
+    public PersistenceDataSourceProperties set$Username(@Value("${username}") String username) {
         super.setUsername(username);
         return this;
     }
 
-    public PersistenceDataSourceProperties set$DriverClassName(String driverClassName) {
+    public PersistenceDataSourceProperties set$DriverClassName(@Value("${driver-class-name}") String driverClassName) {
         super.setDriverClassName(driverClassName);
         return this;
     }
 
 
-    public PersistenceDataSourceProperties set$Url(String url) {
+    public PersistenceDataSourceProperties set$Url(@Value("${url}") String url) {
         super.setUrl(url);
         return this;
     }
 
 
-    public PersistenceDataSourceProperties set$Password(String password) {
+    public PersistenceDataSourceProperties set$Password(@Value("${password}") String password) {
         super.setPassword(password);
         return this;
     }
