@@ -14,6 +14,7 @@ public class UserAllData {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private Long userID;
     private String userAvatarPath;
     private Date logInUserDate;
@@ -22,15 +23,23 @@ public class UserAllData {
     private String skills;
     private String companies;
     private Date dateOfBirthday;
+
+
+    @OneToOne(mappedBy = "userAllData")
+    private User user;
+
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "ipfs_data_user_id" , referencedColumnName = "id")
     private IPFSData ipfsData;
 
+//
+//    @OneToMany(mappedBy = "user" , cascade = CascadeType.ALL , orphanRemoval = true)
+//    private List<Friend> friends;
 
-    @OneToMany(mappedBy = "user" , cascade = CascadeType.ALL , orphanRemoval = true)
-    private List<Friend> friends;
 
-
-    @OneToMany
-    private List<Notification>notifications;
+//    @OneToMany
+//    private List<Notification>notifications;
 
 
 
@@ -53,13 +62,13 @@ public class UserAllData {
     }
 
 
-    public List<Friend> getFriends() {
-        return friends;
-    }
-
-    public void setFriends(List<Friend> friends) {
-        this.friends = friends;
-    }
+//    public List<Friend> getFriends() {
+//        return friends;
+//    }
+//
+//    public void setFriends(List<Friend> friends) {
+//        this.friends = friends;
+//    }
 
     public Long getUserID() {
         return userID;

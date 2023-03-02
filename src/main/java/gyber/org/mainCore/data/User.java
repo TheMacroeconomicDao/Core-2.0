@@ -1,15 +1,14 @@
 package gyber.org.mainCore.data;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "users")
 public class User {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id")
     private Long id;
     private String firstName;
     private String lastName;
@@ -19,6 +18,8 @@ public class User {
     private String email;
     private String passwd;
 
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "user_all_data_id" , referencedColumnName = "id")
     private UserAllData userAllData;
 
 

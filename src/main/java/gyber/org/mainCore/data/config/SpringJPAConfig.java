@@ -1,5 +1,6 @@
 package gyber.org.mainCore.data.config;
 
+import org.springframework.boot.autoconfigure.jdbc.DataSourceProperties;
 import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -31,13 +32,26 @@ public class SpringJPAConfig {
     }
 
 
+    @Bean
+    public DataSourceProperties dataSourceProperties(){
+
+        DataSourceProperties dataSourceProperties = new DataSourceProperties();
+        dataSourceProperties.setUrl("jdbc:mysql://localhost:3306/userdaotest");
+        dataSourceProperties.setDriverClassName("com.mysql.cj.jdbc.Driver");
+        dataSourceProperties.setUsername("root");
+        dataSourceProperties.setPassword("abcdef");
+
+        return dataSourceProperties;
+    }
+
+
 
 
 
     @Bean
     public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
         LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
-        em.setDataSource(dataSource());
+        em.setDataSource(dataSourceProperties().initializeDataSourceBuilder().build());
         em.setJpaVendorAdapter(new HibernateJpaVendorAdapter());
         em.setPackagesToScan("gyber.org.mainCore.data");
 
