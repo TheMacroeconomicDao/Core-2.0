@@ -5,6 +5,7 @@ import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
@@ -12,84 +13,51 @@ import org.springframework.transaction.PlatformTransactionManager;
 
 import javax.sql.DataSource;
 import java.util.Properties;
-
-@Configuration
-@EnableJpaRepositories(basePackages = "gyber.org.mainCore.data")
+//
+//@Configuration
+//@EnableJpaRepositories(basePackages = "gyber.org.mainCore.data")
 public class SpringJPAConfig {
 
 
 
-    @Bean
-    public DataSourceProperties persistenceDataSourceProperties(){
-        return new PersistenceDataSourcePropertiesBuilder();
-    }
-
-
-
-    // Не работает
+//
 //    @Bean
 //    public DataSource dataSource() {
-//        return DataSourceBuilder.create()
-//                .url("jdbc:mysql://localhost:3306/userdaotest")
-//                .driverClassName("com.mysql.cj.jdbc.Driver")
-//                .username("root")
-//                .password("abcdef")
-//                .build();
+//        DriverManagerDataSource dataSource = new DriverManagerDataSource();
+//
+//        dataSource.setDriverClassName("com.mysql.cj.jdbc.Driver");
+//        dataSource.setUsername("root");
+//        dataSource.setPassword("abcdef");
+//        dataSource.setUrl(
+//                "jdbc:mysql://localhost:3306/userdaotest?createDatabaseIfNotExist=true");
+//
+//        return dataSource;
 //    }
-
-
-    @Bean
-    public DataSourceProperties dataSourceProperties(){
-
-        DataSourceProperties dataSourceProperties = new DataSourceProperties();
-        dataSourceProperties.setUrl("jdbc:mysql://localhost:3306/userdaotest");
-        dataSourceProperties.setDriverClassName("com.mysql.cj.jdbc.Driver");
-        dataSourceProperties.setUsername("root");
-        dataSourceProperties.setPassword("abcdef");
-
-        return dataSourceProperties;
-    }
-
-
-
-
-
-    @Bean
-    public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
-        LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
-        //  em.setDataSource(dataSourceProperties().initializeDataSourceBuilder().build());
-        em.setDataSource(persistenceDataSourceProperties().initializeDataSourceBuilder().build());
-        em.setJpaVendorAdapter(new HibernateJpaVendorAdapter());
-        em.setPackagesToScan("gyber.org.mainCore.data");
-
+//
+//    @Bean
+//    public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
+//        LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
+//        em.setDataSource(dataSource());
+//        em.setJpaVendorAdapter(new HibernateJpaVendorAdapter());
+//        em.setPackagesToScan("gyber.org.mainCore.data");
+//        em.setJpaProperties(properties());
+//
+//
+//        return em;
+//    }
+//    @Bean
+//    public Properties properties(){
+//
 //        Properties jpaProperties = new Properties();
-//        jpaProperties.put("hibernate.dialect", "org.hibernate.dialect.MySQL5Dialect");
-//        jpaProperties.put("hibernate.show_sql", true);
-
-        //em.setPersistenceUnitName("mysql");
-//        em.setJpaProperties(jpaProperties);
-
-
-        return em;
-    }
-
-    @Bean
-    public PlatformTransactionManager transactionManager() {
-        JpaTransactionManager transactionManager = new JpaTransactionManager();
-        transactionManager.setEntityManagerFactory(entityManagerFactory().getObject());
-        return transactionManager;
-    }
-
-
-    @Bean
-    public Properties properties(){
-        Properties jpaProperties = new Properties();
-        jpaProperties.put("hibernate.dialect", "org.hibernate.dialect.MySQL5Dialect");
-        jpaProperties.put("hibernate.show_sql", true);
-
-        return jpaProperties;
-
-    }
+//
+//        jpaProperties.put("spring.jpa.hibernate.ddl-auto" , "update");
+////        jpaProperties.put("spring.jpa.properties.hibernate.dialect", "org.hibernate.dialect.MySQL5Dialect");
+////        jpaProperties.put("spring.jpa.show-sql", true);
+//
+//
+//        return jpaProperties;
+//
+//    }
 
 
 //
