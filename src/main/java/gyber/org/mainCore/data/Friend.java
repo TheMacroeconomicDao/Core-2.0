@@ -75,4 +75,16 @@ public class Friend {
     public void setUser(User user) {
         this.user = user;
     }
+
+    @Override
+    public String toString() {
+        return "Friend{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", avatarPath='" + avatarPath + '\'' +
+                ", nickName='" + nickName + '\'' +
+                ", user=" + user +
+                '}';
+    }
 }

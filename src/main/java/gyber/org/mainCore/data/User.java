@@ -81,4 +81,18 @@ public class User {
     public void setUserAllData(UserAllData userAllData) {
         this.userAllData = userAllData;
     }
+
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", nickName='" + nickName + '\'' +
+                ", email='" + email + '\'' +
+                ", passwd='" + passwd + '\'' +
+                ", userAllData=" + userAllData +
+                '}';
+    }
 }

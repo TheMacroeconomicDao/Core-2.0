@@ -142,4 +142,21 @@ public class UserAllData {
     public void setIpfsData(IPFSData ipfsData) {
         this.ipfsData = ipfsData;
     }
+
+
+    @Override
+    public String toString() {
+        return "UserAllData{" +
+                "userID=" + userID +
+                ", userAvatarPath='" + userAvatarPath + '\'' +
+                ", logInUserDate=" + logInUserDate +
+                ", onlineInDate=" + onlineInDate +
+                ", aboutUs='" + aboutUs + '\'' +
+                ", skills='" + skills + '\'' +
+                ", companies='" + companies + '\'' +
+                ", dateOfBirthday=" + dateOfBirthday +
+                ", user=" + user +
+                ", ipfsData=" + ipfsData +
+                '}';
+    }
 }

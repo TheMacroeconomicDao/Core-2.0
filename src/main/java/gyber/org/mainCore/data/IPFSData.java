@@ -15,7 +15,25 @@ public class IPFSData {
     @Column
     private String projectPath;
 
+    private String photosHash;
+
+    private String videosHash;
+
+
+
+
     @OneToOne(mappedBy = "ipfsData")
     private UserAllData userAllData;
 
+
+    @Override
+    public String toString() {
+        return "IPFSData{" +
+                "id=" + id +
+                ", projectPath='" + projectPath + '\'' +
+                ", photosHash='" + photosHash + '\'' +
+                ", videosHash='" + videosHash + '\'' +
+                ", userAllData=" + userAllData +
+                '}';
+    }
 }
