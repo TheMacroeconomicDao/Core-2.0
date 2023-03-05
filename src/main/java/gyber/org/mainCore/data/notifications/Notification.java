@@ -3,13 +3,13 @@ package gyber.org.mainCore.data.notifications;
 import jakarta.persistence.*;
 
 import java.util.Date;
-
-@Entity
-@Table(name = "notification_register")
+//
+//@Entity
+//@Table(name = "notification_register")
 public class Notification {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//
+//    @Id
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long notificationId;
 
     private String from;
