@@ -1,6 +1,6 @@
 package gyber.org.mainCore.view;
 
-import gyber.org.mainCore.data.UserAllData;
+import gyber.org.mainCore.entities.UserAllData;
 
 public class UserModelDTO {
 

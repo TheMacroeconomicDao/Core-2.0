@@ -1,7 +1,7 @@
 package gyber.org.mainCore.controllers;
 
 
-import gyber.org.mainCore.data.User;
+import gyber.org.mainCore.entities.User;
 import gyber.org.mainCore.data.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
