@@ -14,10 +14,8 @@ public class MediaFile {
 
     private String mediaHash;
 
-    @Enumerated
+    @Enumerated(EnumType.STRING)
     private TypeMediaFile mediaType;
-
-
 
     @ManyToOne(fetch = FetchType.EAGER)
     private IPFSData ipfsData;
