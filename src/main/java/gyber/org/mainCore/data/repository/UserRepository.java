@@ -1,6 +1,6 @@
 package gyber.org.mainCore.data.repository;
 
-import gyber.org.mainCore.entities.User;
+import gyber.org.mainCore.data.entities.User;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
