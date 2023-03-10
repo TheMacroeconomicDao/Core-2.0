@@ -18,9 +18,17 @@ public class Friend {
     private String nickName;
 
 
-    @ManyToOne
-    @JoinColumn(name = "user_id")
+    @Transient
     private User user;
+
+
+    @ManyToOne(fetch = FetchType.EAGER , cascade = CascadeType.ALL)
+    private UserAllData userAllData;
+
+    public Friend(){}
+
+
+
 
     public Friend(User user) {
         this.user = user;
@@ -76,6 +84,14 @@ public class Friend {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public UserAllData getUserAllData() {
+        return userAllData;
+    }
+
+    public void setUserAllData(UserAllData userAllData) {
+        this.userAllData = userAllData;
     }
 
     @Override

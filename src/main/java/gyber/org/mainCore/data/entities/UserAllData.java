@@ -2,10 +2,7 @@ package gyber.org.mainCore.data.entities;
 
 import jakarta.persistence.*;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 @Entity
 @Table(name = "users_all_data")
@@ -39,9 +36,9 @@ public class UserAllData {
     private List<MediaFile>mediaFilesUserList;
 
 
-//
-//    @OneToMany(mappedBy = "user" , cascade = CascadeType.ALL , orphanRemoval = true)
-//    private List<Friend> friends;
+
+    @OneToMany(mappedBy = "userAllData" , cascade = CascadeType.ALL)
+    private List<Friend> friends;
 
 
 //    @OneToMany
@@ -162,6 +159,13 @@ public class UserAllData {
 
     }
 
+    public void addFriend(Friend friend){
+        if(this.friends == null){
+            this.friends = Collections.singletonList(friend);
+        }
+        this.friends.add(friend);
+    }
+
     public List<MediaFile> getMediaFilesUserList() {
         return mediaFilesUserList;
     }
@@ -178,4 +182,20 @@ public class UserAllData {
         this.user = user;
     }
 
+    @Override
+    public String toString() {
+        return "UserAllData{" +
+                "userID=" + userID +
+                ", userAvatarPath='" + userAvatarPath + '\'' +
+                ", logInUserDate=" + logInUserDate +
+                ", onlineInDate=" + onlineInDate +
+                ", aboutUs='" + aboutUs + '\'' +
+                ", skills='" + skills + '\'' +
+                ", companies='" + companies + '\'' +
+                ", dateOfBirthday=" + dateOfBirthday +
+                ", user=" + user +
+                ", mediaFilesUserList=" + mediaFilesUserList +
+                ", friends=" + friends +
+                '}';
+    }
 }
