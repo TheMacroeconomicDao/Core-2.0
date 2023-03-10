@@ -17,7 +17,6 @@ public class MediaFile {
     private String mediaHash;
 
     @Enumerated(EnumType.STRING)
-    @Column(columnDefinition = "string")
     private TypeMediaFile mediaType;
 
     @ManyToOne(fetch = FetchType.EAGER , cascade = CascadeType.ALL)
@@ -27,6 +26,7 @@ public class MediaFile {
 
     public MediaFile(String hashPhoto , TypeMediaFile typeMedia) {
         this.mediaHash = hashPhoto;
+        this.mediaType = typeMedia;
     }
     public MediaFile(){}
 
