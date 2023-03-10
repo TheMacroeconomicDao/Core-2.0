@@ -1,8 +1,10 @@
 package gyber.org.mainCore.data.notifications;
 
+import gyber.org.mainCore.notifications.Notification;
+
 import java.util.Date;
 
-public class InviteNotification extends Notification{
+public class InviteNotification extends Notification {
 
 
     private Boolean invitationAccepted;

@@ -25,6 +25,7 @@ public class User {
     private UserAllData userAllData;
 
 
+    public User(){}
 
     public User(String firstName, String lastName, String nickName, String email, String passwd, UserAllData userAllData) {
         this.firstName = firstName;
