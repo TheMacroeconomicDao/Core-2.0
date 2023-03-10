@@ -17,10 +17,11 @@ public class MediaFile {
     private String mediaHash;
 
     @Enumerated(EnumType.STRING)
+    @Column(columnDefinition = "string")
     private TypeMediaFile mediaType;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    private IPFSData ipfsData;
+    @ManyToOne(fetch = FetchType.EAGER , cascade = CascadeType.ALL)
+    private UserAllData userAllData;
 
 
 
@@ -53,27 +54,11 @@ public class MediaFile {
         this.mediaType = mediaType;
     }
 
-
-    @Override
-    public String toString() {
-        return "MediaFile{" +
-                "id=" + id +
-                ", mediaHash='" + mediaHash + '\'' +
-                ", mediaType=" + mediaType +
-                ", ipfsData=" + ipfsData +
-                '}';
+    public UserAllData getUserAllData() {
+        return userAllData;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        MediaFile mediaFile = (MediaFile) o;
-        return Objects.equals(id, mediaFile.id) && Objects.equals(mediaHash, mediaFile.mediaHash) && mediaType == mediaFile.mediaType && Objects.equals(ipfsData, mediaFile.ipfsData);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, mediaHash, mediaType, ipfsData);
+    public void setUserAllData(UserAllData userAllData) {
+        this.userAllData = userAllData;
     }
 }

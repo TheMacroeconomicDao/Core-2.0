@@ -2,7 +2,9 @@ package gyber.org.mainCore.data.entities;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -27,10 +29,15 @@ public class UserAllData {
     @OneToOne(mappedBy = "userAllData")
     private User user;
 
+//
+//    @OneToOne(cascade = CascadeType.ALL)
+//    @JoinColumn(name = "ipfs_data_user_id" , referencedColumnName = "id")
+//    private IPFSData ipfsData;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "ipfs_data_user_id" , referencedColumnName = "id")
-    private IPFSData ipfsData;
+
+    @OneToMany(mappedBy = "userAllData" , cascade = CascadeType.ALL)
+    private List<MediaFile>mediaFilesUserList;
+
 
 //
 //    @OneToMany(mappedBy = "user" , cascade = CascadeType.ALL , orphanRemoval = true)
@@ -45,7 +52,7 @@ public class UserAllData {
 
 
 
-    public UserAllData(String userAvatarPath, Date logInUserDate, Date onlineInDate, String aboutUs, String skills, String companies, Date dateOfBirthday, IPFSData ipfsData) {
+    public UserAllData(String userAvatarPath, Date logInUserDate, Date onlineInDate, String aboutUs, String skills, String companies, Date dateOfBirthday) {
         this.userAvatarPath = userAvatarPath;
         this.logInUserDate = logInUserDate;
         this.onlineInDate = onlineInDate;
@@ -53,7 +60,7 @@ public class UserAllData {
         this.skills = skills;
         this.companies = companies;
         this.dateOfBirthday = dateOfBirthday;
-        this.ipfsData = ipfsData;
+//        this.ipfsData = ipfsData;
     }
 
     public UserAllData(){
@@ -134,14 +141,34 @@ public class UserAllData {
         this.dateOfBirthday = dateOfBirthday;
     }
 
-    public IPFSData getIpfsData() {
-        return ipfsData;
+//    public IPFSData getIpfsData() {
+//        return ipfsData;
+//    }
+//
+//    public void setIpfsData(IPFSData ipfsData) {
+//        this.ipfsData = ipfsData;
+//    }
+
+
+
+    public void addMediaFile(MediaFile mediaFile){
+
+        if(this.mediaFilesUserList == null){
+            this.mediaFilesUserList = new ArrayList<>();
+            this.mediaFilesUserList.add(mediaFile);
+        }
+
+        this.mediaFilesUserList.add(mediaFile);
+
     }
 
-    public void setIpfsData(IPFSData ipfsData) {
-        this.ipfsData = ipfsData;
+    public List<MediaFile> getMediaFilesUserList() {
+        return mediaFilesUserList;
     }
 
+    public void setMediaFilesUserList(List<MediaFile> mediaFilesUserList) {
+        this.mediaFilesUserList = mediaFilesUserList;
+    }
 
     public User getUser() {
         return user;
@@ -151,33 +178,4 @@ public class UserAllData {
         this.user = user;
     }
 
-    @Override
-    public String toString() {
-        return "UserAllData{" +
-                "userID=" + userID +
-                ", userAvatarPath='" + userAvatarPath + '\'' +
-                ", logInUserDate=" + logInUserDate +
-                ", onlineInDate=" + onlineInDate +
-                ", aboutUs='" + aboutUs + '\'' +
-                ", skills='" + skills + '\'' +
-                ", companies='" + companies + '\'' +
-                ", dateOfBirthday=" + dateOfBirthday +
-                ", user=" + user +
-                ", ipfsData=" + ipfsData +
-                '}';
-    }
-
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        UserAllData that = (UserAllData) o;
-        return Objects.equals(userID, that.userID) && Objects.equals(userAvatarPath, that.userAvatarPath) && Objects.equals(logInUserDate, that.logInUserDate) && Objects.equals(onlineInDate, that.onlineInDate) && Objects.equals(aboutUs, that.aboutUs) && Objects.equals(skills, that.skills) && Objects.equals(companies, that.companies) && Objects.equals(dateOfBirthday, that.dateOfBirthday) && Objects.equals(user, that.user) && Objects.equals(ipfsData, that.ipfsData);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(userID, userAvatarPath, logInUserDate, onlineInDate, aboutUs, skills, companies, dateOfBirthday, user, ipfsData);
-    }
 }
