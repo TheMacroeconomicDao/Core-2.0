@@ -1,7 +1,5 @@
 package gyber.org.mainCore.data.notifications;
 
-import gyber.org.mainCore.notifications.Notification;
-
 import java.util.Date;
 
 public class SystemNotification extends Notification {

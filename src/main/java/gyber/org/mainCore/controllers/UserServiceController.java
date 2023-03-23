@@ -25,10 +25,31 @@ public class UserServiceController {
         return ResponseEntity.ok().build();
     }
 
+    @GetMapping("/bynick")
+    public ResponseEntity<User> getUserByNickName(@RequestParam("nick") String nickName){
+        // ...
+
+        return ResponseEntity.ok().build();
+
+    }
+
 
 
     @GetMapping("/byid")
-    public ResponseEntity<User> getUserByID(){
+    public ResponseEntity<User> getUserByID(@RequestParam("usrid") Long id){
+        try{
+
+            User local = this.userRepository.findById(id).orElseThrow();
+
+
+            return local == null ? ResponseEntity.badRequest().build() : ResponseEntity.ok(local);
+
+
+
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
 
         return ResponseEntity.ok().build();
     }
@@ -52,8 +73,8 @@ public class UserServiceController {
         return ResponseEntity.ok().build();
     }
 
-    @DeleteMapping("/del")
-    public ResponseEntity deleteTheUser(@RequestParam Long id){
+    @DeleteMapping("/deactivate")
+    public ResponseEntity deactivateUserProfile(@RequestParam("id") Long id){
 
         /*
          Мы не будем удалять данные пользователя , мы
