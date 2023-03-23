@@ -1,5 +1,6 @@
 package gyber.org.mainCore.data.entities;
 
+import gyber.org.mainCore.data.entities.enums.ProfileDeactivateStatus;
 import jakarta.persistence.*;
 
 import java.util.Objects;
@@ -19,6 +20,10 @@ public class User {
 
     private String email;
     private String passwd;
+
+    @Enumerated(EnumType.STRING)
+    private ProfileDeactivateStatus profileStatus;
+
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "user_all_data_id" , referencedColumnName = "id")
