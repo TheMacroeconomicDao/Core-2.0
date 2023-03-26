@@ -9,7 +9,7 @@ public class UsersFriends {
     Long pair_ID;
 
 
-    
+
     User user_id;
     User friend_id;
 

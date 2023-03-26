@@ -13,6 +13,7 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<name>mainCore</name>
 	<description>This is main core for gyber.org platform. This core include the main functionality in platform </description>
+
 	<properties>
 		<java.version>17</java.version>
 	</properties>
@@ -36,6 +37,15 @@
 			<scope>runtime</scope>
 			<optional>true</optional>
 		</dependency>
+
+
+		<!-- https://mvnrepository.com/artifact/com.github.ipfs/java-ipfs-http-client -->
+		<dependency>
+			<groupId>com.github.ipfs</groupId>
+			<artifactId>java-ipfs-http-client</artifactId>
+			<version>v1.3.3</version>
+		</dependency>
+
 
 
 		<dependency>
@@ -79,6 +89,16 @@
 		</plugins>
 	</build>
 	<repositories>
+
+
+			<repository>
+				<id>jitpack.io</id>
+				<url>https://jitpack.io</url>
+			</repository>
+
+
+
+
 		<repository>
 			<id>spring-milestones</id>
 			<name>Spring Milestones</name>
