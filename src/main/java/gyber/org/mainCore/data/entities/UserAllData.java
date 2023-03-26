@@ -37,8 +37,19 @@ public class UserAllData {
 
 
 
-    @OneToMany(mappedBy = "userAllData" , cascade = CascadeType.ALL)
-    private List<Friend> friends;
+
+    @ManyToMany
+    @JoinTable(
+            name = "users_friends" ,
+            joinColumns = @JoinColumn(name = "user_id") ,
+            inverseJoinColumns = @JoinColumn(name = "friend_id")
+    )
+    private Set<User>usersFriends;
+
+
+//
+//    @OneToMany(mappedBy = "userAllData" , cascade = CascadeType.ALL)
+//    private List<Friend> friends;
 
 
 //    @OneToMany
@@ -65,13 +76,13 @@ public class UserAllData {
     }
 
 
-    public List<Friend> getFriends() {
-        return friends;
-    }
-
-    public void setFriends(List<Friend> friends) {
-        this.friends = friends;
-    }
+//    public List<Friend> getFriends() {
+//        return friends;
+//    }
+//
+//    public void setFriends(List<Friend> friends) {
+//        this.friends = friends;
+//    }
 
     public Long getUserID() {
         return userID;
@@ -159,12 +170,12 @@ public class UserAllData {
 
     }
 
-    public void addFriend(Friend friend){
-        if(this.friends == null){
-            this.friends = Collections.singletonList(friend);
-        }
-        this.friends.add(friend);
-    }
+//    public void addFriend(Friend friend){
+//        if(this.friends == null){
+//            this.friends = Collections.singletonList(friend);
+//        }
+//        this.friends.add(friend);
+//    }
 
     public List<MediaFile> getMediaFilesUserList() {
         return mediaFilesUserList;
@@ -181,21 +192,21 @@ public class UserAllData {
     public void setUser(User user) {
         this.user = user;
     }
-
-    @Override
-    public String toString() {
-        return "UserAllData{" +
-                "userID=" + userID +
-                ", userAvatarPath='" + userAvatarPath + '\'' +
-                ", logInUserDate=" + logInUserDate +
-                ", onlineInDate=" + onlineInDate +
-                ", aboutUs='" + aboutUs + '\'' +
-                ", skills='" + skills + '\'' +
-                ", companies='" + companies + '\'' +
-                ", dateOfBirthday=" + dateOfBirthday +
-                ", user=" + user +
-                ", mediaFilesUserList=" + mediaFilesUserList +
-                ", friends=" + friends +
-                '}';
-    }
+//
+//    @Override
+//    public String toString() {
+//        return "UserAllData{" +
+//                "userID=" + userID +
+//                ", userAvatarPath='" + userAvatarPath + '\'' +
+//                ", logInUserDate=" + logInUserDate +
+//                ", onlineInDate=" + onlineInDate +
+//                ", aboutUs='" + aboutUs + '\'' +
+//                ", skills='" + skills + '\'' +
+//                ", companies='" + companies + '\'' +
+//                ", dateOfBirthday=" + dateOfBirthday +
+//                ", user=" + user +
+//                ", mediaFilesUserList=" + mediaFilesUserList +
+//                ", friends=" + friends +
+//                '}';
+//    }
 }
