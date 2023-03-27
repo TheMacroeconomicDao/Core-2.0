@@ -1,12 +1,21 @@
 package gyber.org.mainCore.data.entities;
 
+import gyber.org.mainCore.data.entities.enums.Role;
 import jakarta.persistence.*;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
-import java.util.Objects;
+import java.util.Collection;
+import java.util.List;
 
 @Entity
+@Data
+@NoArgsConstructor
 @Table(name = "users")
-public class User {
+public class User implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,9 +32,47 @@ public class User {
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "user_all_data_id" , referencedColumnName = "id")
     private UserAllData userAllData;
+    @Enumerated(EnumType.STRING)
+    private Role role;
 
 
-    public User(){}
+    //Импелентирумые методы UserDetails
+
+
+    @Override
+    public String getPassword() {
+        return passwd;
+    }
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return List.of(new SimpleGrantedAuthority(role.name()));
+    }
+
+    @Override
+    public String getUsername() {
+        return email;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
+    }
 
     public User(String firstName, String lastName, String nickName, String email, String passwd, UserAllData userAllData) {
         this.firstName = firstName;
@@ -42,74 +89,6 @@ public class User {
         this.firstName = firstName;
         this.lastName = lastName;
         this.passwd = passwd;
-
     }
 
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public String getNickName() {
-        return nickName;
-    }
-
-    public void setNickName(String nickName) {
-        this.nickName = nickName;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public UserAllData getUserAllData() {
-        return userAllData;
-    }
-
-    public void setUserAllData(UserAllData userAllData) {
-        this.userAllData = userAllData;
-    }
-
-
-    @Override
-    public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", nickName='" + nickName + '\'' +
-                ", email='" + email + '\'' +
-                ", passwd='" + passwd + '\'' +
-                ", userAllData=" + userAllData +
-                '}';
-    }
-
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        User user = (User) o;
-        return Objects.equals(id, user.id) && Objects.equals(firstName, user.firstName) && Objects.equals(lastName, user.lastName) && Objects.equals(nickName, user.nickName) && Objects.equals(email, user.email) && Objects.equals(passwd, user.passwd) && Objects.equals(userAllData, user.userAllData);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, firstName, lastName, nickName, email, passwd, userAllData);
-    }
 }
