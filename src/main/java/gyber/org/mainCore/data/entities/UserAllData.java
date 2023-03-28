@@ -193,7 +193,7 @@ public class UserAllData {
                 ", skills='" + skills + '\'' +
                 ", companies='" + companies + '\'' +
                 ", dateOfBirthday=" + dateOfBirthday +
-                ", user=" + user +
+//                ", user=" + user +
                 ", mediaFilesUserList=" + mediaFilesUserList +
                 ", friends=" + friends +
                 '}';

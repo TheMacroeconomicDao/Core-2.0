@@ -34,7 +34,7 @@ public class Friend {
         this.user = user;
         this.name = user.getFirstName();
         this.lastName = user.getLastName();
-        this.avatarPath = user.getUserAllData().getUserAvatarPath();
+//        this.avatarPath = user.getUserAllData().getUserAvatarPath();
         this.nickName = user.getNickName();
     }
 
