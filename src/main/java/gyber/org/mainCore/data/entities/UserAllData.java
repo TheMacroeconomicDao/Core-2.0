@@ -38,7 +38,7 @@ public class UserAllData {
 
 
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
             name = "users_friends" ,
             joinColumns = @JoinColumn(name = "user_id") ,
@@ -47,16 +47,8 @@ public class UserAllData {
     private Set<User>usersFriends;
 
 
-//
-//    @OneToMany(mappedBy = "userAllData" , cascade = CascadeType.ALL)
-//    private List<Friend> friends;
-
-
 //    @OneToMany
 //    private List<Notification>notifications;
-
-
-
 
 
 
@@ -183,6 +175,14 @@ public class UserAllData {
 
     public void setMediaFilesUserList(List<MediaFile> mediaFilesUserList) {
         this.mediaFilesUserList = mediaFilesUserList;
+    }
+
+    public Set<User> getUsersFriends() {
+        return usersFriends;
+    }
+
+    public void setUsersFriends(Set<User> usersFriends) {
+        this.usersFriends = usersFriends;
     }
 
     public User getUser() {

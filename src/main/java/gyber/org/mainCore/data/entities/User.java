@@ -90,6 +90,32 @@ public class User {
         this.userAllData = userAllData;
     }
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getPasswd() {
+        return passwd;
+    }
+
+    public void setPasswd(String passwd) {
+        this.passwd = passwd;
+    }
+
+    public ProfileDeactivateStatus getProfileStatus() {
+        return profileStatus;
+    }
+
+    public void setProfileStatus(ProfileDeactivateStatus profileStatus) {
+        this.profileStatus = profileStatus;
+    }
+
+
+
 
     @Override
     public String toString() {
