@@ -12,6 +12,8 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
     Optional<User> findByEmail(String email);
 
+    Optional<User> findByNickName(String nickname);
+
     default void addUserFriendToList(Long userId , Long friendUserId){
 
 
