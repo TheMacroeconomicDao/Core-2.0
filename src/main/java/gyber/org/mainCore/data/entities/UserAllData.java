@@ -209,4 +209,21 @@ public class UserAllData {
 //                ", friends=" + friends +
 //                '}';
 //    }
+
+    @Override
+    public String toString() {
+        return "UserAllData{" +
+                "userID=" + userID +
+                ", userAvatarPath='" + userAvatarPath + '\'' +
+                ", logInUserDate=" + logInUserDate +
+                ", onlineInDate=" + onlineInDate +
+                ", aboutUs='" + aboutUs + '\'' +
+                ", skills='" + skills + '\'' +
+                ", companies='" + companies + '\'' +
+                ", dateOfBirthday=" + dateOfBirthday +
+//                ", user=" + user +
+                ", mediaFilesUserList=" + mediaFilesUserList +
+                ", friends=" + usersFriends +
+                '}';
+    }
 }

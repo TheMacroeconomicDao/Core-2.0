@@ -1,24 +1,41 @@
 package gyber.org.mainCore.data.entities;
 
 import gyber.org.mainCore.data.entities.enums.ProfileDeactivateStatus;
+import gyber.org.mainCore.data.entities.enums.Role;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
+import java.util.Collection;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
+@Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "users")
-public class User {
+public class User implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private Long id;
+    private Integer id;
     private String firstName;
     private String lastName;
 
     private String nickName;
 
+    @Email(message = "Email is Invalid")
     private String email;
+
     private String passwd;
 
     @Enumerated(EnumType.STRING)
@@ -28,9 +45,47 @@ public class User {
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "user_all_data_id" , referencedColumnName = "id")
     private UserAllData userAllData;
+    @Enumerated(EnumType.STRING)
+    private Role role;
 
 
-    public User(){}
+    //Импелентирумые методы UserDetails
+
+
+    @Override
+    public String getPassword() {
+        return passwd;
+    }
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return List.of(new SimpleGrantedAuthority(role.name()));
+    }
+
+    @Override
+    public String getUsername() {
+        return email;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
+    }
 
     public User(String firstName, String lastName, String nickName, String email, String passwd, UserAllData userAllData) {
         this.firstName = firstName;
@@ -47,71 +102,6 @@ public class User {
         this.firstName = firstName;
         this.lastName = lastName;
         this.passwd = passwd;
-
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public String getNickName() {
-        return nickName;
-    }
-
-    public void setNickName(String nickName) {
-        this.nickName = nickName;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public UserAllData getUserAllData() {
-        return userAllData;
-    }
-
-    public void setUserAllData(UserAllData userAllData) {
-        this.userAllData = userAllData;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getPasswd() {
-        return passwd;
-    }
-
-    public void setPasswd(String passwd) {
-        this.passwd = passwd;
-    }
-
-    public ProfileDeactivateStatus getProfileStatus() {
-        return profileStatus;
-    }
-
-    public void setProfileStatus(ProfileDeactivateStatus profileStatus) {
-        this.profileStatus = profileStatus;
     }
 
 
@@ -143,4 +133,5 @@ public class User {
     public int hashCode() {
         return Objects.hash(id, firstName, lastName, nickName, email, passwd, userAllData);
     }
+
 }
