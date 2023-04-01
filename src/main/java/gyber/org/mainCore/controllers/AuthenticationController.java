@@ -21,12 +21,13 @@ public class AuthenticationController {
     ) {
         return ResponseEntity.ok(service.register(request));
     }
-    @PostMapping("/authenticateEmail")
-    public ResponseEntity<AuthenticationResponse> authenticateEmail(
-            @RequestBody AuthenticationRequestEmail request
+    @PostMapping("/authenticate")
+    public ResponseEntity<AuthenticationResponse> authenticate(
+            @RequestBody AuthenticationRequest request
     ) {
-        return ResponseEntity.ok(service.authenticateEmail(request));
+        return ResponseEntity.ok(service.authenticate(request));
     }
+
 
 
 

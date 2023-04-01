@@ -7,6 +7,7 @@ import gyber.org.mainCore.data.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -37,19 +38,20 @@ public class AuthenticationService {
                     .token(jwtToken)
                     .build();
         } else {
-            return AuthenticationResponse.builder().build();
+            var userrr = repository.findByNickNameOrEmail(request.getEmail(), request.getNickname()).orElseThrow(() -> new UsernameNotFoundException("Пользователь с таким email или nickname уже существует"));
+            return null;
         }
     }
 
 
-    public AuthenticationResponse authenticateEmail(AuthenticationRequestEmail request) {
+    public AuthenticationResponse authenticate(AuthenticationRequest request) {
         authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
-                        request.getEmail(),
+                        request.getEmailOrNickName(),
                         request.getPassword()
                 )
         );
-        var user = repository.findByEmail(request.getEmail())
+        var user = repository.findByNickNameOrEmail(request.getEmailOrNickName(), request.getEmailOrNickName())
                 .orElseThrow();
         var jwtToken = jwtService.generateToken(user);
 
@@ -57,6 +59,7 @@ public class AuthenticationService {
                 .token(jwtToken)
                 .build();
     }
+
 
 
 
