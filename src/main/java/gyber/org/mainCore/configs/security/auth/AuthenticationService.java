@@ -38,7 +38,7 @@ public class AuthenticationService {
                     .token(jwtToken)
                     .build();
         } else {
-            var userrr = repository.findByNickNameOrEmail(request.getEmail(), request.getNickname()).orElseThrow(() -> new UsernameNotFoundException("Пользователь с таким email или nickname уже существует"));
+            var unknowUser = repository.findByNickNameOrEmail(request.getEmail(), request.getNickname()).orElseThrow(() -> new UsernameNotFoundException("Пользователь с таким email или nickname уже существует"));
             return null;
         }
     }
