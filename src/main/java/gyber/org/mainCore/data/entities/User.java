@@ -2,12 +2,14 @@ package gyber.org.mainCore.data.entities;
 
 import gyber.org.mainCore.data.entities.enums.ProfileDeactivateStatus;
 import gyber.org.mainCore.data.entities.enums.Role;
+import gyber.org.mainCore.data.repository.UserRepository;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -23,7 +25,6 @@ import java.util.Objects;
 @AllArgsConstructor
 @Table(name = "users")
 public class User implements UserDetails {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
@@ -64,7 +65,11 @@ public class User implements UserDetails {
 
     @Override
     public String getUsername() {
-        return email;
+        if(email.isEmpty()) {
+            return nickName;
+        } else {
+            return email;
+        }
     }
 
     @Override

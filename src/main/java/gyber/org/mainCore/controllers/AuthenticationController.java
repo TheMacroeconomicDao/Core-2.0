@@ -1,9 +1,6 @@
 package gyber.org.mainCore.controllers;
 
-import gyber.org.mainCore.configs.security.auth.AuthenticationRequest;
-import gyber.org.mainCore.configs.security.auth.AuthenticationResponse;
-import gyber.org.mainCore.configs.security.auth.AuthenticationService;
-import gyber.org.mainCore.configs.security.auth.RegisterRequest;
+import gyber.org.mainCore.configs.security.auth.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -30,6 +27,8 @@ public class AuthenticationController {
     ) {
         return ResponseEntity.ok(service.authenticate(request));
     }
+
+
 
 
 }
