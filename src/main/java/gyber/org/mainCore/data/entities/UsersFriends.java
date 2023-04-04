@@ -27,6 +27,12 @@ public class UsersFriends {
         this.userFriendId = new UserFriendId(user.getId(), friend.getId());
     }
 
+
+    public UsersFriends(Integer userId , Integer friendId){
+        this.userFriendId = new UserFriendId(userId , friendId);
+
+    }
+
     public UserFriendId getUserFriendId() {
         return userFriendId;
     }

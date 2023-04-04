@@ -1,6 +1,7 @@
 package gyber.org.mainCore.data.entities;
 
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
 
 import java.io.Serializable;
@@ -8,8 +9,8 @@ import java.io.Serializable;
 @Embeddable
 public class UserFriendId implements Serializable {
 
-    private Integer userId;
-    private Integer friendId;
+    @Column(name = "user_id") private Integer userId;
+    @Column(name = "friend_id") private Integer friendId;
 
 
 

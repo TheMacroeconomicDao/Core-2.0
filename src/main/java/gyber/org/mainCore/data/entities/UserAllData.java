@@ -13,7 +13,7 @@ public class UserAllData {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private Long userID;
+    private Integer userID;
     private String userAvatarPath;
     private Date logInUserDate;
     private Date onlineInDate;
@@ -76,11 +76,11 @@ public class UserAllData {
 //        this.friends = friends;
 //    }
 
-    public Long getUserID() {
+    public Integer getUserID() {
         return userID;
     }
 
-    public void setUserID(Long userID) {
+    public void setUserID(Integer userID) {
         this.userID = userID;
     }
 
