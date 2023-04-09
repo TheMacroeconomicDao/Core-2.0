@@ -31,7 +31,7 @@ import static org.springframework.http.HttpStatus.FORBIDDEN;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api")
-public class UserResource {
+public class UserResourceController {
     private final UserService userService;
     @GetMapping("/users")
     public ResponseEntity<List<User>> getUsers() {
