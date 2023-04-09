@@ -27,7 +27,7 @@ import java.util.stream.Collectors;
 import static org.springframework.http.HttpHeaders.AUTHORIZATION;
 import static org.springframework.http.HttpStatus.FORBIDDEN;
 
-
+//Для теста контроллер
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api")
@@ -94,7 +94,7 @@ public class UserResource {
 
 
 }
-
+//Класс для привзяки роли к пользователю, для теста
 @Data
 class RoleToUserForm {
     private String username;
