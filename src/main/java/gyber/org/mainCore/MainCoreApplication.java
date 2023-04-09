@@ -23,7 +23,6 @@ public class MainCoreApplication {
 		SpringApplication.run(MainCoreApplication.class, args);
 	}
 
-
 	@Bean
 	PasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder();
