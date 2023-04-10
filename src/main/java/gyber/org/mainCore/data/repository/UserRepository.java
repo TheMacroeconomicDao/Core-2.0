@@ -10,9 +10,9 @@ import java.util.Optional;
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
 
-    Optional<User> findByEmail(String email);
-    Optional<User> findByNickNameOrEmail(String emailOrNickname, String nickNameOrEmail);
-    Optional<User> findByNickName(String nickname);
+    User findByEmail(String email);
+    User findByNickNameOrEmail(String emailOrNickname, String nickNameOrEmail);
+    User findByNickName(String nickname);
 
     default void addUserFriendToList(Long userId , Long friendUserId){
 
