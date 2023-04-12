@@ -36,6 +36,8 @@ public class UserService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username)
             throws UsernameNotFoundException {
+        log.info("Method UserDetails from UserService.class");
+
         User user = userRepository.findByNickNameOrEmail(username, username);
         if (user == null) {
             log.error("User not found in the database");
@@ -55,6 +57,8 @@ public class UserService implements UserDetailsService {
      */
 
     public User saveUser(User user) {
+        log.info("Method saveUser from UserService.class");
+
         log.info("Saving new user {} to the database", user.getNickName());
         user.setPasswd(passwordEncoder.encode(user.getPasswd()));
         return userRepository.save(user);
@@ -67,6 +71,8 @@ public class UserService implements UserDetailsService {
      */
 
     public Role saveRole(final Role role) {
+        log.info("Method saveRole from UserService.class");
+
         log.info("Saving new role {} to the database", role.getName());
         return roleRepository.save(role);
     }
@@ -78,6 +84,8 @@ public class UserService implements UserDetailsService {
      */
 
     public void addRoleToUser(String username, String roleName) {
+        log.info("Method addRoleToUser from UserService.class");
+
         log.info("Add new role {} to user {} to the database", roleName, username);
         User user = userRepository.findByNickNameOrEmail(username, username);
         Role role = roleRepository.findByName(roleName);
@@ -91,6 +99,8 @@ public class UserService implements UserDetailsService {
      */
 
     public User getUser(String username) {
+        log.info("Method getUser from UserService.class");
+
         log.info("Fetching user {}", username);
         return userRepository.findByNickNameOrEmail(username, username);
     }
@@ -101,6 +111,8 @@ public class UserService implements UserDetailsService {
      */
 
     public List<User> getUsers() {
+        log.info("Method getUsers from UserService.class");
+
         log.info("Fetching all users");
         return userRepository.findAll();
     }

@@ -56,6 +56,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
      * @param friendId id пользователя
      */
     default void deleteFriendUserInList(Long userId, Long friendId) {
+
         User user = findById(userId).orElseThrow();
 
         /// ...

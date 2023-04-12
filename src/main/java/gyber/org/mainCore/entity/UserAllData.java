@@ -3,6 +3,7 @@ package gyber.org.mainCore.entity;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.extern.slf4j.Slf4j;
 
 
 import java.util.ArrayList;
@@ -13,6 +14,7 @@ import java.util.List;
 @Entity
 @Table(name = "users_all_data")
 @Data
+@Slf4j
 public class UserAllData {
 
 
@@ -101,6 +103,7 @@ public class UserAllData {
      * @param mediaFile ...
      */
     public void addMediaFile(MediaFile mediaFile) {
+        log.info("Method addMediaFile from UserAllData.class");
 
         if (this.mediaFilesUserList == null) {
             this.mediaFilesUserList = new ArrayList<>();
@@ -116,6 +119,8 @@ public class UserAllData {
      * @param friend ...
      */
     public void addFriend(Friend friend) {
+        log.info("Method addFriend from UserAllData.class");
+
         if (this.friends == null) {
             this.friends = Collections.singletonList(friend);
         }
