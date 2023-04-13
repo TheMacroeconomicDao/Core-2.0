@@ -2,6 +2,7 @@ package gyber.org.mainCore.util.manager;
 
 
 import jakarta.annotation.PostConstruct;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
@@ -11,6 +12,7 @@ import java.nio.file.FileAlreadyExistsException;
 import java.util.Locale;
 
 @Component
+@Slf4j
 public class FileManager {
 
     /**
@@ -29,7 +31,7 @@ public class FileManager {
      */
     @PostConstruct
     public void init() {
-
+        log.info("Method init from FileManager.class");
         try {
             if (!new File(baseDirectoryPath).exists()) {
                 new File(baseDirectoryPath).mkdir();
@@ -60,7 +62,7 @@ public class FileManager {
      * @return возвращает...
      */
     public FileManager reserveNameByFile(Long id, String nickName, File file) {
-
+        log.info("Method reserveNameByFile(64 str) from FileManager.class");
         String reversedNameFile = "";
 
 
@@ -88,7 +90,7 @@ public class FileManager {
      * @return возвращает...
      */
     public String reserveNameByFile(Long id, String nickName, int x) {
-
+        log.info("Method reserveNameByFile(92 str) from FileManager.class");
 
         String reversedNameFile = "";
 
@@ -112,7 +114,7 @@ public class FileManager {
      * @param nickName никнейм...
      */
     public void delete(Long id, String nickName) {
-
+        log.info("Method delete from FileManager.class");
         if (nickName.indexOf('@') != -1) {
             nickName = nickName.replace("@", "").toLowerCase(Locale.ROOT);
             System.out.println("nickName replaced : " + nickName);
@@ -137,7 +139,7 @@ public class FileManager {
      * Не знаю за что отвечает метод(Aomisha).
      */
     public void save() throws IOException {
-
+        log.info("Method save from FileManager.class");
         if (this.fileToSave.exists()) {
             System.err.println("FILE TO SAVE EXIST");
             throw new FileAlreadyExistsException(this.fileToSave.getAbsolutePath());
@@ -158,7 +160,7 @@ public class FileManager {
      * @return возвращает...
      */
     public String getProfilePhoto(Long id, String nickName) {
-
+        log.info("Method getProfilePhoto from FileManager.class");
         // reserveNameByFile(id , nickName);
 
 
